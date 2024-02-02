@@ -5,6 +5,6 @@ using UnityEngine;
 public class TileInfo
 {
     public AttackMove attackMove;
-    public int cityOwner;
+    public int tileOwner;
 }
 
