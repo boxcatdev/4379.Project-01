@@ -12,6 +12,9 @@ public class GridModify : MonoBehaviour
     [SerializeField] private Sprite _tileSprite;
     [SerializeField] private Vector2Int _horizontalGridBounds;
     [SerializeField] private Vector2Int _verticalGridBounds;
+    [Space]
+    [SerializeField] private Color _playerColor;
+    [SerializeField] private Color _enemyColor;
 
     private void Awake()
     {
@@ -20,7 +23,7 @@ public class GridModify : MonoBehaviour
     }
     private void Start()
     {
-        ChangeAllTiles();
+        //ChangeAllTiles();
     }
     private void OnEnable()
     {
@@ -46,7 +49,25 @@ public class GridModify : MonoBehaviour
 
         Debug.Log(cellInt.ToString());
     }
-    private void ChangeAllTiles()
+    public void PlaceRandomCity(bool isPlayer)
+    {
+        // select tile in range
+        Vector3Int cityPos = new Vector3Int(Random.Range(_horizontalGridBounds.x + 1, _horizontalGridBounds.y - 1), 
+            Random.Range(_verticalGridBounds.x + 1, _verticalGridBounds.y - 1), 0);
+
+        // modify tile based on player or not
+        Vector3Int cellInt = _tilemap.WorldToCell(cityPos);
+        TileBase tile = _tilemap.GetTile(cellInt);
+
+        Tile moddTile = new Tile();
+        moddTile.sprite = _tileSprite;
+        moddTile.color = isPlayer ? _playerColor : _enemyColor;
+
+        _tilemap.SetTile(cellInt, moddTile);
+
+        _tilemap.RefreshTile(cellInt);
+    }
+    public void ChangeAllTiles()
     {
         for (int x = _horizontalGridBounds.x; x < _horizontalGridBounds.y + 1; x++)
         {
