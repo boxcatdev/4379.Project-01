@@ -13,8 +13,10 @@ public class GridModify : MonoBehaviour
     [SerializeField] private Vector2Int _horizontalGridBounds;
     [SerializeField] private Vector2Int _verticalGridBounds;
     [Space]
+    [SerializeField] private Color _groundColor;
     [SerializeField] private Color _playerColor;
     [SerializeField] private Color _enemyColor;
+
 
     private void Awake()
     {
@@ -27,7 +29,7 @@ public class GridModify : MonoBehaviour
     }
     private void OnEnable()
     {
-        TouchInput.OnClicked += Clicked;
+        //TouchInput.OnClicked += Clicked;
     }
 
     private void Clicked()
@@ -67,6 +69,7 @@ public class GridModify : MonoBehaviour
 
         _tilemap.RefreshTile(cellInt);
     }
+    
     public void ChangeAllTiles()
     {
         for (int x = _horizontalGridBounds.x; x < _horizontalGridBounds.y + 1; x++)
@@ -82,7 +85,7 @@ public class GridModify : MonoBehaviour
 
                     Tile startTile = new Tile();
                     startTile.sprite = _tileSprite;
-                    startTile.color = Color.green;
+                    startTile.color = _groundColor;
 
                     //_tilemap.SetColor(pos, Color.green);
                     _tilemap.SetTile(pos, startTile);

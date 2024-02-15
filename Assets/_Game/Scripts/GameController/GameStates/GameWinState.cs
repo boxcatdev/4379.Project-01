@@ -19,11 +19,17 @@ public class GameWinState : State
 
         //refresh state UI
         _controller.UIManager.RefreshStateText("GameWinState");
+
+        // enable win canvas
+        _controller.UIManager.EnableWinCanvas(true);
     }
 
     public override void Exit()
     {
         base.Exit();
+
+        // enable win canvas
+        _controller.UIManager.EnableWinCanvas(false);
     }
 
     public override void FixedTick()
@@ -34,5 +40,13 @@ public class GameWinState : State
     public override void Tick()
     {
         base.Tick();
+
+        //update fill bar
+        _controller.UIManager.UpdateFillAmount(StateDuration, 2f);
+
+        if(StateDuration > 2f)
+        {
+            _stateMachine.ChangeState(_stateMachine.SetupState);
+        }
     }
 }

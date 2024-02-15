@@ -27,6 +27,7 @@ public class GamePlaceCityState : State
 
         //place enemy city
         _controller.GridModify.PlaceRandomCity(false);
+        _controller.BattleController.StoreEnemyMove();
     }
 
     public override void Exit()
@@ -42,6 +43,9 @@ public class GamePlaceCityState : State
     public override void Tick()
     {
         base.Tick();
+
+        //update fill bar
+        _controller.UIManager.UpdateFillAmount(StateDuration, 2f);
 
         if (StateDuration > 2f)
             _stateMachine.ChangeState(_stateMachine.BattleState);

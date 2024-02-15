@@ -11,8 +11,9 @@ public class GameController : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private GridModify _gridModify;
     [SerializeField] private UIManager _uiManager;
+    [SerializeField] private BattleController _battleController;
 
     public GridModify GridModify => _gridModify;
     public UIManager UIManager => _uiManager;
-
+    public BattleController BattleController => _battleController;
 }

@@ -17,7 +17,12 @@ public class GameBattleState : State
 
     public override void Enter()
     {
+        _endTurn = false;
+
         base.Enter();
+
+        //update fill bar
+        _controller.UIManager.UpdateFillAmount(StateDuration, 1f);
 
         //refresh state UI
         _controller.UIManager.RefreshStateText("GameBattleState");
@@ -26,6 +31,9 @@ public class GameBattleState : State
 
         // subscribe to touch input component
         TouchInput.OnClicked += DoBattleStuff;
+
+        // enable battle canvas
+        _controller.UIManager.EnableBattleCanvas(true);
     }
 
     public override void Exit()
@@ -34,6 +42,9 @@ public class GameBattleState : State
         TouchInput.OnClicked -= DoBattleStuff;
 
         base.Exit();
+
+        // disable battle canvas
+        _controller.UIManager.EnableBattleCanvas(false);
     }
 
     public override void FixedTick()
@@ -45,13 +56,24 @@ public class GameBattleState : State
     {
         base.Tick();
 
-        //if (_endTurn) _stateMachine.ChangeState(_stateMachine.SetupState);
+        if (_endTurn)
+        {
+            //do
+            _stateMachine.ChangeState(_stateMachine.WinState);
+        }
 
-        if (StateDuration > 2f) _stateMachine.ChangeState(_stateMachine.SetupState);
+        //if (StateDuration > 2f) _stateMachine.ChangeState(_stateMachine.SetupState);
     }
-
-    private void DoBattleStuff()
+    public void DoBattleStuff()
     {
+        //do battle
+        AttackResult aResult = _controller.BattleController.TryPlayerBattle();
+
+        //update text in win menu
+        _controller.UIManager.UpdateWinText(aResult);
+
+        //end turn
+        _endTurn = true;
 
     }
 }

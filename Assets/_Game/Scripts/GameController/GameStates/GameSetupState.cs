@@ -41,7 +41,10 @@ public class GameSetupState : State
     {
         base.Tick();
 
-        if(StateDuration > 2f)
+        //update fill bar
+        _controller.UIManager.UpdateFillAmount(StateDuration, 2f);
+
+        if (StateDuration > 2f)
             _stateMachine.ChangeState(_stateMachine.PlaceCityState);
     }
 }
