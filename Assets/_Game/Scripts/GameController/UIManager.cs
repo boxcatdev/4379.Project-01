@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private TextMeshProUGUI _stateText;
     [SerializeField] private TextMeshProUGUI _winText;
+    [SerializeField] private TextMeshProUGUI _enemyMoveText;
     [SerializeField] private Image _nextStateFill;
     [Space]
     [SerializeField] private GameObject _battleCanvas;
@@ -35,11 +36,22 @@ public class UIManager : MonoBehaviour
     {
         if(_winText != null)
         {
-            _winText.text = attackResult.ToString();
+            _winText.text = "Result: " + attackResult.ToString();
         }
         else
         {
             Debug.LogError("Missing Win Text");
+        }
+    }
+    public void UpdateEnemyMoveText(AttackMove enemyMove)
+    {
+        if(_enemyMoveText != null)
+        {
+            _enemyMoveText.text = "Enemy Move: " + enemyMove.ToString();
+        }
+        else
+        {
+            Debug.LogError("Missing Enemy Move Text");
         }
     }
     public void UpdateFillAmount(float amount, float limit)
@@ -56,10 +68,10 @@ public class UIManager : MonoBehaviour
 
     public void EnableBattleCanvas(bool isEnabled)
     {
-        _battleCanvas.SetActive(isEnabled);
+        if(_battleCanvas != null) _battleCanvas.SetActive(isEnabled);
     }
     public void EnableWinCanvas(bool isEnabled)
     {
-        _winCanvas.SetActive(isEnabled);
+        if(_winCanvas != null) _winCanvas.SetActive(isEnabled);
     }
 }

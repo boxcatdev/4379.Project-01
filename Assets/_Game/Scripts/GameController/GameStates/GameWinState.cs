@@ -22,6 +22,9 @@ public class GameWinState : State
 
         // enable win canvas
         _controller.UIManager.EnableWinCanvas(true);
+
+        //play state change SFX
+        //_controller.AudioSFX.PlaySoundEffect(SFXType.StateChange);
     }
 
     public override void Exit()

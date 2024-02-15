@@ -28,6 +28,9 @@ public class GamePlaceCityState : State
         //place enemy city
         _controller.GridModify.PlaceRandomCity(false);
         _controller.BattleController.StoreEnemyMove();
+
+        //play state change SFX
+        _controller.AudioSFX.PlaySoundEffect(SFXType.StateChange);
     }
 
     public override void Exit()
@@ -45,9 +48,9 @@ public class GamePlaceCityState : State
         base.Tick();
 
         //update fill bar
-        _controller.UIManager.UpdateFillAmount(StateDuration, 2f);
+        _controller.UIManager.UpdateFillAmount(StateDuration, 1.5f);
 
-        if (StateDuration > 2f)
+        if (StateDuration > 1.5f)
             _stateMachine.ChangeState(_stateMachine.BattleState);
     }
 }

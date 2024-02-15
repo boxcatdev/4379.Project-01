@@ -7,8 +7,10 @@ public class BattleController : MonoBehaviour
 {
     [SerializeField] private GameFSM gameFSM;
 
-    private AttackMove _enemyMove;
-    private AttackMove _playerMove;
+    [field:SerializeField]
+    public AttackMove enemyMove {  get; private set; }
+    [field:SerializeField]
+    public AttackMove playerMove { get; private set; }
 
     private void Awake()
     {
@@ -19,7 +21,8 @@ public class BattleController : MonoBehaviour
     {
         if (gameFSM.CurrentState == gameFSM.BattleState)
         {
-            _playerMove = (AttackMove)0;
+            StorePlayerMove(AttackMove.Rock);
+
             gameFSM.BattleState.DoBattleStuff();
         }
     }
@@ -27,34 +30,38 @@ public class BattleController : MonoBehaviour
     {
         if (gameFSM.CurrentState == gameFSM.BattleState)
         {
-            _playerMove = (AttackMove)1;
+            StorePlayerMove(AttackMove.Paper);
+
             gameFSM.BattleState.DoBattleStuff();
         }
     }
     public void PlayerMoveScissors()
     {
-        _playerMove = AttackMove.Scissors;
-        gameFSM.BattleState.DoBattleStuff();
-
         if (gameFSM.CurrentState == gameFSM.BattleState)
         {
-            
+            StorePlayerMove(AttackMove.Scissors);
+
+            gameFSM.BattleState.DoBattleStuff();
         }
 
     }
     #endregion
 
     #region Battle
+    public void StorePlayerMove(AttackMove move)
+    {
+        playerMove = move;
+    }
     public void StoreEnemyMove()
     {
         if (gameFSM.CurrentState == gameFSM.PlaceCityState)
-            _enemyMove = (AttackMove)Random.Range(0, 3);
+            enemyMove = (AttackMove)Random.Range(0, 3);
 
-        Debug.Log("StoreEnemyMove: " + _enemyMove.ToString());
+        Debug.Log("StoreEnemyMove: " + enemyMove.ToString());
     }
     public AttackResult TryPlayerBattle()
     {
-        return RockPaperScissors.CheckIfPlayerWins(_playerMove, _enemyMove);
+        return RockPaperScissors.CheckIfPlayerWins(playerMove, enemyMove);
     }
     #endregion
 }

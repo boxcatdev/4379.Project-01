@@ -25,6 +25,9 @@ public class GameSetupState : State
 
         //turn all the tiles to green
         _controller.GridModify.ChangeAllTiles();
+
+        //play state change SFX
+        _controller.AudioSFX.PlaySoundEffect(SFXType.StateChange);
     }
 
     public override void Exit()
@@ -42,9 +45,9 @@ public class GameSetupState : State
         base.Tick();
 
         //update fill bar
-        _controller.UIManager.UpdateFillAmount(StateDuration, 2f);
+        _controller.UIManager.UpdateFillAmount(StateDuration, 1.5f);
 
-        if (StateDuration > 2f)
+        if (StateDuration > 1.5f)
             _stateMachine.ChangeState(_stateMachine.PlaceCityState);
     }
 }

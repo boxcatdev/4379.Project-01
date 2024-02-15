@@ -29,18 +29,15 @@ public class GameBattleState : State
 
         Debug.Log("STATE: Battle State");
 
-        // subscribe to touch input component
-        TouchInput.OnClicked += DoBattleStuff;
-
         // enable battle canvas
         _controller.UIManager.EnableBattleCanvas(true);
+
+        //play state change SFX
+        _controller.AudioSFX.PlaySoundEffect(SFXType.StateChange);
     }
 
     public override void Exit()
     {
-        // unsubscribe to touch input component
-        TouchInput.OnClicked -= DoBattleStuff;
-
         base.Exit();
 
         // disable battle canvas
@@ -72,6 +69,23 @@ public class GameBattleState : State
         //update text in win menu
         _controller.UIManager.UpdateWinText(aResult);
 
+        //update enemy move text
+        _controller.UIManager.UpdateEnemyMoveText(_controller.BattleController.enemyMove);
+
+        //play win SFX
+        switch (aResult)
+        {
+            case AttackResult.Win:
+                _controller.AudioSFX.PlaySoundEffect(SFXType.Win);
+                break;
+            case AttackResult.Lose:
+                _controller.AudioSFX.PlaySoundEffect(SFXType.Lose);
+                break;
+            case AttackResult.Draw:
+                _controller.AudioSFX.PlaySoundEffect(SFXType.Draw);
+                break;
+        }
+        
         //end turn
         _endTurn = true;
 
