@@ -16,11 +16,23 @@ public class GameEnemyTurnState : State
     public override void Enter()
     {
         base.Enter();
+
+        //refresh state UI
+        _controller.UIManager.RefreshStateText("EnemyTurnState");
+
+        //update instruction UI
+        _controller.UIManager.UpdateInstructionText(StatesUIEnum.Enemy);
+
+        //enable enemy turn controller
+        _controller.EnemyTurn.gameObject.SetActive(true);
     }
 
     public override void Exit()
     {
         base.Exit();
+
+        //disable enemy turn controller
+        _controller.EnemyTurn.gameObject.SetActive(false);
     }
 
     public override void FixedTick()
