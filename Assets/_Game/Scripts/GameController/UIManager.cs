@@ -16,9 +16,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _winCanvas;
 
 
-    [Header("Turn Description")]
-    [SerializeField] private GameObject _descriptionCanvas;
-    [SerializeField] private TextMeshProUGUI _descriptionText;
+    [Header("Turn Instruction")]
+    [SerializeField] private GameObject _instructionCanvas;
+    [SerializeField] private TextMeshProUGUI _instructionText;
 
 
     private void Start()
@@ -71,6 +71,8 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
+    #region Enable Canvases
     public void EnableBattleCanvas(bool isEnabled)
     {
         if(_battleCanvas != null) _battleCanvas.SetActive(isEnabled);
@@ -81,6 +83,21 @@ public class UIManager : MonoBehaviour
     }
     public void EnableDescriptionCanvas(bool isEnabled)
     {
-        if(_descriptionCanvas != null) _descriptionCanvas.SetActive(isEnabled);
+        if(_instructionCanvas != null) _instructionCanvas.SetActive(isEnabled);
     }
+    #endregion
+
+    #region Instruction Canvas
+    public void UpdateInstructionText(StatesUIEnum state)
+    {
+        switch(state)
+        {
+            case StatesUIEnum.Setup:
+                //
+                break;
+        }
+    }
+    #endregion
 }
+
+public enum StatesUIEnum { Setup, Choose, Player, Enemy, Win, Lose}

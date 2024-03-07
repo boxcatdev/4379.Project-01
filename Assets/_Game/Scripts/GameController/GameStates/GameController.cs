@@ -12,7 +12,10 @@ public class GameController : MonoBehaviour
     [SerializeField] private GridModify _gridModify;
     [SerializeField] private UIManager _uiManager;
     [SerializeField] private BattleController _battleController;
+    [Space]
     [SerializeField] private ChooseManager _chooseManager;
+    [SerializeField] private PlayerTurnController _playerTurn;
+    [SerializeField] private EnemyTurnController _enemyTurn;
 
     private AudioManagerMusic _audioMusic;
     public AudioManagerSFX _audioSFX;
@@ -23,9 +26,10 @@ public class GameController : MonoBehaviour
     public AudioManagerMusic AudioMusic => _audioMusic;
     public AudioManagerSFX AudioSFX => _audioSFX;
 
-
-
+    //updated references
     public ChooseManager ChooseManager => _chooseManager;
+    public PlayerTurnController PlayerTurn => _playerTurn;
+    public EnemyTurnController EnemyTurn => _enemyTurn;
 
     private void Start()
     {

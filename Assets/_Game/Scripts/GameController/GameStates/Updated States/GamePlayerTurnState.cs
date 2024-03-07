@@ -19,11 +19,17 @@ public class GamePlayerTurnState : State
 
         //refresh state UI
         _controller.UIManager.RefreshStateText("PlayerTurnState");
+
+        //enable player turn controller
+        _controller.PlayerTurn.gameObject.SetActive(true);
     }
 
     public override void Exit()
     {
         base.Exit();
+
+        //disable player turn controller
+        _controller.PlayerTurn.gameObject.SetActive(false);
     }
 
     public override void FixedTick()
