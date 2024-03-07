@@ -20,6 +20,9 @@ public class GameSetupState : State
         //refresh state UI
         _controller.UIManager.RefreshStateText("SetupState");
 
+        //hide instruction UI
+        _controller.UIManager.EnableInstructionCanvas(false);
+
         Debug.Log("STATE: Game Setup");
         Debug.Log("Change tiles to green");
 

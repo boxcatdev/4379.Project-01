@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
         _battleCanvas?.SetActive(false);
         _winCanvas?.SetActive(false);
     }
+
+    #region Updates
     public void RefreshStateText(string text)
     {
         if(_stateText != null)
@@ -70,7 +72,7 @@ public class UIManager : MonoBehaviour
             Debug.Log("Missing Next State Fill");
         }
     }
-
+    #endregion
 
     #region Enable Canvases
     public void EnableBattleCanvas(bool isEnabled)
@@ -81,7 +83,7 @@ public class UIManager : MonoBehaviour
     {
         if(_winCanvas != null) _winCanvas.SetActive(isEnabled);
     }
-    public void EnableDescriptionCanvas(bool isEnabled)
+    public void EnableInstructionCanvas(bool isEnabled)
     {
         if(_instructionCanvas != null) _instructionCanvas.SetActive(isEnabled);
     }
@@ -95,9 +97,27 @@ public class UIManager : MonoBehaviour
             case StatesUIEnum.Setup:
                 //
                 break;
+            case StatesUIEnum.Choose:
+                //give instruction for choosing defend move
+                _instructionText.text = "The enemy has chosen their defense moves (rock/paper/scissors). " +
+                    "Click on your remaining cities and choose a defense move (rock/paper/scissors) to protect it if attacked by the enemy.";
+                break;
+            case StatesUIEnum.Player:
+                //give instructions for attacking the enemy cities
+                _instructionText.text = "click on one of the enemy's remaining cities to attack them. " +
+                    "If your attack move (rock/paper/scissors) beats their defense move (rock/paper/scissors) you will claim their city for yourself.";
+                break;
+            case StatesUIEnum.Enemy:
+                //explain what the enemy will do
+                _instructionText.text = "The enemy will now retaliate by attacking your remaining cities. Whoever loses all their cities will lose the game." +
+                    "Otherwise both teams will need to reset their defenses.";
+                break;
+            case StatesUIEnum.GameOver:
+                //
+                break;
         }
     }
     #endregion
 }
 
-public enum StatesUIEnum { Setup, Choose, Player, Enemy, Win, Lose}
+public enum StatesUIEnum { Setup, Choose, Player, Enemy, GameOver}

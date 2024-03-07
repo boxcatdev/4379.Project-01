@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class GamePlayerChooseState : State
+public class GameChooseState : State
 {
     private GameFSM _stateMachine;
     private GameController _controller;
 
-    public GamePlayerChooseState(GameFSM stateMachine, GameController controller)
+    public GameChooseState(GameFSM stateMachine, GameController controller)
     {
         _stateMachine = stateMachine;
         _controller = controller;
@@ -20,6 +20,10 @@ public class GamePlayerChooseState : State
 
         //refresh state UI
         _controller.UIManager.RefreshStateText("PlayerChooseState");
+
+        //update instruction UI
+        _controller.UIManager.EnableInstructionCanvas(true);
+        _controller.UIManager.UpdateInstructionText(StatesUIEnum.Choose);
 
         //enable manager
         _controller.ChooseManager.gameObject.SetActive(true);

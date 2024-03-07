@@ -20,6 +20,9 @@ public class GamePlayerTurnState : State
         //refresh state UI
         _controller.UIManager.RefreshStateText("PlayerTurnState");
 
+        //update instruction UI
+        _controller.UIManager.UpdateInstructionText(StatesUIEnum.Player);
+
         //enable player turn controller
         _controller.PlayerTurn.gameObject.SetActive(true);
     }

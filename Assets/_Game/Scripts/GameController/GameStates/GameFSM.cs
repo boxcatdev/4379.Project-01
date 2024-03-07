@@ -14,7 +14,7 @@ public class GameFSM : StateMachineMB
 
     //updated state variables
     public GameSetupState SetupState { get; private set; }
-    public GamePlayerChooseState ChooseState { get; private set; }
+    public GameChooseState ChooseState { get; private set; }
     public GamePlayerTurnState PlayerTurnState { get; private set; }
     public GameEnemyTurnState EnemyTurnState { get; private set; }
     public GameWinState WinState { get; private set; }
@@ -29,7 +29,7 @@ public class GameFSM : StateMachineMB
 
         //updated state variables
         SetupState = new GameSetupState(this, _controller);
-        ChooseState = new GamePlayerChooseState(this, _controller);
+        ChooseState = new GameChooseState(this, _controller);
         PlayerTurnState = new GamePlayerTurnState(this, _controller);
         EnemyTurnState = new GameEnemyTurnState(this, _controller);
         WinState = new GameWinState(this, _controller);

@@ -17,17 +17,26 @@ public class HexTile : MonoBehaviour
     public bool HasDefend => _hasDefendMove;
     public AttackMove DefendMove => _defendMove;
 
+    //can be attacked in case a city is captured
+    public bool CanBattle { get; private set; } = false;
+
     public void SetDefendMove(AttackMove defendMove)
     {
         _defendMove = defendMove;
         _hasDefendMove = true;
+        CanBattle = true;
         ChooseManager.ChosenCitiesCount++;
 
-        Debug.LogWarning("SetDefendMove()");
+        Debug.Log("SetDefendMove()");
     }
     public void ResetDefendMove()
     {
         _hasDefendMove = false;
+    }
+    public void SetTeamOnCapture(GameTeam team)
+    {
+        _team = team;
+        CanBattle = false;
     }
 
 }
