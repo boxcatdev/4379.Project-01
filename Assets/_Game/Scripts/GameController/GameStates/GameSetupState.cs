@@ -18,7 +18,7 @@ public class GameSetupState : State
         base.Enter();
 
         //refresh state UI
-        _controller.UIManager.RefreshStateText("GameSetupState");
+        _controller.UIManager.RefreshStateText("SetupState");
 
         Debug.Log("STATE: Game Setup");
         Debug.Log("Change tiles to green");
@@ -48,6 +48,6 @@ public class GameSetupState : State
         _controller.UIManager.UpdateFillAmount(StateDuration, 1.5f);
 
         if (StateDuration > 1.5f)
-            _stateMachine.ChangeState(_stateMachine.PlaceCityState);
+            _stateMachine.ChangeState(_stateMachine.ChooseState);
     }
 }

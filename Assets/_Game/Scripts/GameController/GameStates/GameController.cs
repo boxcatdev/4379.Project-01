@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private GridModify _gridModify;
     [SerializeField] private UIManager _uiManager;
     [SerializeField] private BattleController _battleController;
+    [SerializeField] private ChooseManager _chooseManager;
 
     private AudioManagerMusic _audioMusic;
     public AudioManagerSFX _audioSFX;
@@ -22,6 +23,9 @@ public class GameController : MonoBehaviour
     public AudioManagerMusic AudioMusic => _audioMusic;
     public AudioManagerSFX AudioSFX => _audioSFX;
 
+
+
+    public ChooseManager ChooseManager => _chooseManager;
 
     private void Start()
     {

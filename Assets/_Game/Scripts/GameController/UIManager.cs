@@ -16,6 +16,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _winCanvas;
 
 
+    [Header("Turn Description")]
+    [SerializeField] private GameObject _descriptionCanvas;
+    [SerializeField] private TextMeshProUGUI _descriptionText;
+
+
     private void Start()
     {
         _battleCanvas?.SetActive(false);
@@ -73,5 +78,9 @@ public class UIManager : MonoBehaviour
     public void EnableWinCanvas(bool isEnabled)
     {
         if(_winCanvas != null) _winCanvas.SetActive(isEnabled);
+    }
+    public void EnableDescriptionCanvas(bool isEnabled)
+    {
+        if(_descriptionCanvas != null) _descriptionCanvas.SetActive(isEnabled);
     }
 }
