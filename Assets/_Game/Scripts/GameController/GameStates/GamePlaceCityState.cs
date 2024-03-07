@@ -23,10 +23,10 @@ public class GamePlaceCityState : State
         Debug.Log("STATE: Place Player & Enemy Cities");
 
         //place player city
-        _controller.GridModify.PlaceRandomCity(true);
+        //_controller.GridModify.PlaceRandomCity(true);
 
         //place enemy city
-        _controller.GridModify.PlaceRandomCity(false);
+        //_controller.GridModify.PlaceRandomCity(false);
         _controller.BattleController.StoreEnemyMove();
 
         //play state change SFX
