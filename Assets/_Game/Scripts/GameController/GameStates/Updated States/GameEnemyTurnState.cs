@@ -71,7 +71,7 @@ public class GameEnemyTurnState : State
         //update fill bar
         _controller.UIManager.UpdateFillAmount(StateDuration, 6.0f);
 
-        if (StateDuration > 3.0f && _hasAttacked == false)
+        if (StateDuration > 4.0f && _hasAttacked == false)
         {
             //update instruction UI
             _controller.UIManager.UpdateInstructionText(StatesUIEnum.EnemySecond);
@@ -84,7 +84,7 @@ public class GameEnemyTurnState : State
             _hasAttacked = true;
         }
 
-        if(StateDuration > 6.0f && _hasAttacked == true)
+        if(StateDuration > 8.0f && _hasAttacked == true)
         {
             //check if anyone has won; if not loop to choose state
             //TODO

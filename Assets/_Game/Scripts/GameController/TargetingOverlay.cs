@@ -20,14 +20,14 @@ public class TargetingOverlay : MonoBehaviour
     {
         Selection(null);
     }
-    private void OnEnable()
+    /*private void OnEnable()
     {
         GridSelection.OnGridTileSelected += Selection;
     }
     private void OnDisable()
     {
         GridSelection.OnGridTileSelected -= Selection;
-    }
+    }*/
     private void Update()
     {
         if (isVisible)

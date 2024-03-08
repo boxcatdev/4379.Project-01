@@ -61,7 +61,7 @@ public class GameChooseState : State
     {
         base.Tick();
 
-        if(ChooseManager.ChosenCitiesCount >= 6)
+        if(ChooseManager.ChosenCitiesCount >= GridSelection.CityTiles.Count)
         {
             //setup enemy city defend moves
             //moved to enter function
