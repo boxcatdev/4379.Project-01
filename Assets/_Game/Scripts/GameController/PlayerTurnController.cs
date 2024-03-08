@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 
 public class PlayerTurnController : MonoBehaviour
 {
     [SerializeField] private Transform _attackPanel;
+
+    public bool PlayerHasAttacked {  get; private set; } = false;
 
     private void Start()
     {
@@ -20,6 +23,11 @@ public class PlayerTurnController : MonoBehaviour
         GridSelection.OnGridTileSelected -= ToggleAttackPanel;
     }
 
+    public void ResetPlayerHasAttacked()
+    {
+        PlayerHasAttacked = false;
+    }
+
     public void UseAttackOnCity(int attackInt)
     {
         if(GridSelection.SelectedTile != null)
@@ -29,20 +37,31 @@ public class PlayerTurnController : MonoBehaviour
             //result of the fight
             AttackResult aResult = RockPaperScissors.CheckIfPlayerWins((AttackMove)attackInt, GridSelection.SelectedTile.DefendMove);
 
-            if(aResult == AttackResult.Win)
+            PopupText.OnPopup?.Invoke(aResult.ToString());
+
+            if (aResult == AttackResult.Win)
             {
                 //take over enemy city
                 GridSelection.SelectedTile.SetTeamOnCapture(GameTeam.Player);
 
                 Debug.LogWarning("City Captured");
 
-                //TODO Setup enemy attack state
+                //update score
+                ScoreManager.OnScoreChanged?.Invoke();
             }
             else
             {
                 //nothing happens
             }
         }
+
+        //deselect tile
+        GridSelection.ResetSelectedTile();
+
+        //TODO check for winners
+        ScoreManager.CheckIfGameOver();
+
+        PlayerHasAttacked = true;
     }
 
     public void ToggleAttackPanel(HexTile tile)

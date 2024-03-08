@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private ChooseManager _chooseManager;
     [SerializeField] private PlayerTurnController _playerTurn;
     [SerializeField] private EnemyTurnController _enemyTurn;
+    [SerializeField] private PopupText _popupText;
 
     private AudioManagerMusic _audioMusic;
     public AudioManagerSFX _audioSFX;
@@ -30,6 +31,7 @@ public class GameController : MonoBehaviour
     public ChooseManager ChooseManager => _chooseManager;
     public PlayerTurnController PlayerTurn => _playerTurn;
     public EnemyTurnController EnemyTurn => _enemyTurn;
+    public PopupText PopupText => _popupText;
 
     private void Start()
     {

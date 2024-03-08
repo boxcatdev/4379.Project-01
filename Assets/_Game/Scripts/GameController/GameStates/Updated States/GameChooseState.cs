@@ -32,10 +32,10 @@ public class GameChooseState : State
         ChooseManager.ChosenCitiesCount = 0;
 
         //reset player cities
-        _controller.ChooseManager.SetupEnemyDefendMoves();
+        _controller.ChooseManager.ResetPlayerCities();
 
         //setup enemy city defend moves
-
+        _controller.ChooseManager.SetupEnemyDefendMoves();
     }
 
     public override void Exit()

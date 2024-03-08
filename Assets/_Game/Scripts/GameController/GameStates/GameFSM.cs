@@ -17,7 +17,8 @@ public class GameFSM : StateMachineMB
     public GameChooseState ChooseState { get; private set; }
     public GamePlayerTurnState PlayerTurnState { get; private set; }
     public GameEnemyTurnState EnemyTurnState { get; private set; }
-    public GameWinState WinState { get; private set; }
+    public GameGameOverState GameOverState { get; private set; }
+    //public GameWinState WinState { get; private set; }
 
     private void Awake()
     {
@@ -32,7 +33,8 @@ public class GameFSM : StateMachineMB
         ChooseState = new GameChooseState(this, _controller);
         PlayerTurnState = new GamePlayerTurnState(this, _controller);
         EnemyTurnState = new GameEnemyTurnState(this, _controller);
-        WinState = new GameWinState(this, _controller);
+        GameOverState = new GameGameOverState(this, _controller);
+        //WinState = new GameWinState(this, _controller);
     }
 
     private void Start()

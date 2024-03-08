@@ -25,6 +25,11 @@ public class GamePlayerTurnState : State
 
         //enable player turn controller
         _controller.PlayerTurn.gameObject.SetActive(true);
+
+        //reset player has attacked
+        _controller.PlayerTurn.ResetPlayerHasAttacked();
+
+        ScoreManager.OnGameOver += SwitchOnGameOver;
     }
 
     public override void Exit()
@@ -33,6 +38,8 @@ public class GamePlayerTurnState : State
 
         //disable player turn controller
         _controller.PlayerTurn.gameObject.SetActive(false);
+
+        ScoreManager.OnGameOver -= SwitchOnGameOver;
     }
 
     public override void FixedTick()
@@ -43,5 +50,13 @@ public class GamePlayerTurnState : State
     public override void Tick()
     {
         base.Tick();
+
+        if (_controller.PlayerTurn.PlayerHasAttacked == true)
+            _stateMachine.ChangeState(_stateMachine.EnemyTurnState);
+    }
+
+    private void SwitchOnGameOver()
+    {
+        _stateMachine.ChangeState(_stateMachine.GameOverState);
     }
 }

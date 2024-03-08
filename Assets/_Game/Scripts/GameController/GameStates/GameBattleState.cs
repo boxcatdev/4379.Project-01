@@ -56,7 +56,7 @@ public class GameBattleState : State
         if (_endTurn)
         {
             //do
-            _stateMachine.ChangeState(_stateMachine.WinState);
+            //_stateMachine.ChangeState(_stateMachine.WinState);
         }
 
         //if (StateDuration > 2f) _stateMachine.ChangeState(_stateMachine.SetupState);

@@ -13,11 +13,23 @@ public class GridSelection : MonoBehaviour
 
     public static Action<HexTile> OnGridTileSelected = delegate { };
 
-    public List<HexTile> CityTiles;
+    public static List<HexTile> CityTiles;
 
     private void Awake()
     {
         _input = FindObjectOfType<TouchInput>();
+
+        CityTiles = new List<HexTile>();
+        HexTile[] tiles = FindObjectsOfType<HexTile>();
+        foreach (HexTile tile in tiles)
+        {
+            if(tile.TileType == TileType.City) CityTiles.Add(tile);
+        }
+
+        if (CityTiles.Count > 0)
+            Debug.LogFormat("CitiesFound: {0}", CityTiles.Count);
+        else
+            Debug.LogError("No Cities found");
     }
     private void OnEnable()
     {
@@ -28,6 +40,31 @@ public class GridSelection : MonoBehaviour
         TouchInput.OnClicked -= SelectGridTile;
     }
 
+    public static HexTile GetRandomPlayerCity()
+    {
+        List<HexTile> playerCityList = new List<HexTile>();
+        int playerCitiesCount = 0;
+
+        //get player cities
+        foreach (HexTile city in CityTiles)
+        {
+            if(city.Team == GameTeam.Player)
+            {
+                playerCitiesCount++;
+                playerCityList.Add(city);
+            }
+        }
+
+        //return random city
+        if(playerCityList.Count > 1)
+        {
+            return playerCityList[UnityEngine.Random.Range(0, playerCityList.Count - 1)];
+        }
+        else
+        {
+            return playerCityList[0];
+        }
+    }
     public void SelectGridTile()
     {
         Ray ray = Camera.main.ScreenPointToRay(_input.TouchScreenPosition);
@@ -45,29 +82,38 @@ public class GridSelection : MonoBehaviour
                 if (tile == SelectedTile)
                 {
                     SelectedTile = null;
-                    OnGridTileSelected?.Invoke(null);
+                    //OnGridTileSelected?.Invoke(null);
                 }
                 else
                 {
                     if (CanSelect)
                     {
                         SelectedTile = tile;
-                        OnGridTileSelected?.Invoke(tile);
+                        //OnGridTileSelected?.Invoke(tile);
                     }
                 }
             }
             else
             {
                 SelectedTile = null;
-                OnGridTileSelected?.Invoke(null);
+                //OnGridTileSelected?.Invoke(null);
             }
         }
         else
         {
             Debug.LogFormat("No hit");
             SelectedTile = null;
-            OnGridTileSelected?.Invoke(null);
+            //OnGridTileSelected?.Invoke(null);
         }
 
+
+        OnGridTileSelected?.Invoke(SelectedTile);
+
+    }
+
+    public static void ResetSelectedTile()
+    {
+        SelectedTile = null;
+        OnGridTileSelected?.Invoke(SelectedTile);
     }
 }

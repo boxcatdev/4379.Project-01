@@ -107,17 +107,24 @@ public class UIManager : MonoBehaviour
                 _instructionText.text = "click on one of the enemy's remaining cities to attack them. " +
                     "If your attack move (rock/paper/scissors) beats their defense move (rock/paper/scissors) you will claim their city for yourself.";
                 break;
-            case StatesUIEnum.Enemy:
+            case StatesUIEnum.EnemyFirst:
                 //explain what the enemy will do
-                _instructionText.text = "The enemy will now retaliate by attacking your remaining cities. Whoever loses all their cities will lose the game." +
-                    "Otherwise both teams will need to reset their defenses.";
+                _instructionText.text = "The enemy is selecting a city to attack...";
+                break;
+            case StatesUIEnum.EnemySecond:
+                //
+                _instructionText.text = "The enemy will now retaliate by attacking one of your remaining cities.";
                 break;
             case StatesUIEnum.GameOver:
                 //
+                if (ScoreManager.GetHasPlayerWon())
+                    _instructionText.text = "You have defeated the enemy. Return to the main menu to play again.";
+                else
+                    _instructionText.text = "The enemy has defeated you. Return to the main menu to try again.";
                 break;
         }
     }
     #endregion
 }
 
-public enum StatesUIEnum { Setup, Choose, Player, Enemy, GameOver}
+public enum StatesUIEnum { Setup, Choose, Player, EnemyFirst, EnemySecond, GameOver}

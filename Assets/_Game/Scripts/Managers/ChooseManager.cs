@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChooseManager : MonoBehaviour
 {
-    private GridSelection _gridSelection;
+    //private GridSelection _gridSelection;
 
     [SerializeField] private Transform _choosePanel;
 
@@ -12,7 +12,7 @@ public class ChooseManager : MonoBehaviour
 
     private void Awake()
     {
-        _gridSelection = FindObjectOfType<GridSelection>();
+        //_gridSelection = FindObjectOfType<GridSelection>();
     }
     private void Start()
     {
@@ -40,11 +40,13 @@ public class ChooseManager : MonoBehaviour
             Debug.Log("SelectedTile == null");
         }
 
-        ToggleChoosePanel(null);
+        //ToggleChoosePanel(null);
+        //deselect tile
+        GridSelection.ResetSelectedTile();
     }
     public void ResetPlayerCities()
     {
-        foreach (HexTile cityTile in _gridSelection.CityTiles)
+        foreach (HexTile cityTile in GridSelection.CityTiles)
         {
             if(cityTile.Team == GameTeam.Player)
             {
@@ -54,7 +56,7 @@ public class ChooseManager : MonoBehaviour
     }
     public void SetupEnemyDefendMoves()
     {
-        foreach (HexTile cityTile in _gridSelection.CityTiles)
+        foreach (HexTile cityTile in GridSelection.CityTiles)
         {
             if(cityTile.Team == GameTeam.Enemy)
             {

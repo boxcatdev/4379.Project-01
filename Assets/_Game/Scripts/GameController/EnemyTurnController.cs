@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class EnemyTurnController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private HexTile _tileToAttack;
 
-    // Update is called once per frame
-    void Update()
+    public void ChooseCityToAttack()
     {
-        
+        _tileToAttack = GridSelection.GetRandomPlayerCity();
+    }
+    public void ResetCityToAttack()
+    {
+        _tileToAttack = null;
+    }
+    public void UseAttackOnCity(int attackInt)
+    {
+        //result of the fight
+        AttackResult aResult = RockPaperScissors.CheckIfPlayerWins((AttackMove)attackInt, _tileToAttack.DefendMove);
+
+        PopupText.OnPopup?.Invoke(aResult.ToString());
+
+        if (aResult == AttackResult.Win)
+        {
+            //take over enemy city
+            _tileToAttack.SetTeamOnCapture(GameTeam.Enemy);
+
+            //update score
+            ScoreManager.OnScoreChanged?.Invoke();
+        }
+        else
+        {
+            //nothing happens
+        }
     }
 }
