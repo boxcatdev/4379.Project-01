@@ -5,10 +5,16 @@ using UnityEngine;
 
 public class PlayerTurnController : MonoBehaviour
 {
+    private GameController _controller;
+
     [SerializeField] private Transform _attackPanel;
 
     public bool PlayerHasAttacked {  get; private set; } = false;
 
+    private void Awake()
+    {
+        _controller = GetComponentInParent<GameController>();
+    }
     private void Start()
     {
         _attackPanel.gameObject.SetActive(false);
@@ -37,7 +43,10 @@ public class PlayerTurnController : MonoBehaviour
             //result of the fight
             AttackResult aResult = RockPaperScissors.CheckIfPlayerWins((AttackMove)attackInt, GridSelection.SelectedTile.DefendMove);
 
-            PopupText.OnPopup?.Invoke(aResult.ToString());
+            //popup
+            PopupText.OnPopup?.Invoke("Player: " + (AttackMove)attackInt + "\n" + aResult.ToString());
+            //sfx
+            _controller.AudioSFX.PlaySoundEffect(ResultToSFX(aResult));
 
             if (aResult == AttackResult.Win)
             {
@@ -62,6 +71,20 @@ public class PlayerTurnController : MonoBehaviour
         ScoreManager.CheckIfGameOver();
 
         PlayerHasAttacked = true;
+    }
+    private SFXType ResultToSFX(AttackResult attackResult)
+    {
+        switch (attackResult)
+        {
+            case AttackResult.Win:
+                return SFXType.Win;
+            case AttackResult.Lose:
+                return SFXType.Lose;
+            case AttackResult.Draw:
+                return SFXType.Draw;
+            default:
+                return SFXType.Draw;
+        }
     }
 
     public void ToggleAttackPanel(HexTile tile)

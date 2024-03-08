@@ -8,16 +8,21 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _playerScoreText;
     [SerializeField] private TextMeshProUGUI _enemyScoreText;
+    [Space]
+    [SerializeField] private TextMeshProUGUI _roundCounter;
 
     public static Action OnScoreChanged = delegate { };
     public static Action OnGameOver = delegate { };
 
     public static int PlayerCitiesRemaining { get; private set; }
     public static int EnemyCitiesRemaining { get; private set; }
+    public static int CurrentRound { get; set; } = 1;
+    private int _savedRound = -1;
 
     private void Start()
     {
         UpdateScore();
+        UpdateRoundUI();
     }
     private void OnEnable()
     {
@@ -26,6 +31,14 @@ public class ScoreManager : MonoBehaviour
     private void OnDisable()
     {
         OnScoreChanged -= UpdateScore;
+    }
+    private void Update()
+    {
+        if(CurrentRound != _savedRound)
+        {
+            _savedRound = CurrentRound;
+            UpdateRoundUI();
+        }
     }
 
     public static bool CheckIfGameOver()
@@ -73,5 +86,12 @@ public class ScoreManager : MonoBehaviour
     {
         if (_playerScoreText != null) _playerScoreText.text = "Remaining Cities: " + PlayerCitiesRemaining;
         if (_enemyScoreText != null) _enemyScoreText.text = "Remaining Cities: " + EnemyCitiesRemaining;
+    }
+    private void UpdateRoundUI()
+    {
+        if(_roundCounter != null)
+        {
+            _roundCounter.text = "Round: " + CurrentRound;
+        }
     }
 }

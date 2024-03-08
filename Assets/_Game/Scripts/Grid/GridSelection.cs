@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GridSelection : MonoBehaviour
 {
+    private GameController _controller;
+
     private TouchInput _input;
 
     public static bool CanSelect = true;
@@ -17,6 +19,7 @@ public class GridSelection : MonoBehaviour
 
     private void Awake()
     {
+        _controller = FindObjectOfType<GameController>();
         _input = FindObjectOfType<TouchInput>();
 
         CityTiles = new List<HexTile>();
@@ -106,9 +109,20 @@ public class GridSelection : MonoBehaviour
             //OnGridTileSelected?.Invoke(null);
         }
 
-
+        //tile selected event
         OnGridTileSelected?.Invoke(SelectedTile);
 
+        //sfx
+        if(SelectedTile != null)
+        {
+            //play state change SFX
+            _controller.AudioSFX.PlaySoundEffect(SFXType.Select);
+        }
+        else
+        {
+            //play state change SFX
+            _controller.AudioSFX.PlaySoundEffect(SFXType.Deselect);
+        }
     }
 
     public static void ResetSelectedTile()

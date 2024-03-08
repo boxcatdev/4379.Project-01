@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxVolume: 0.35
   stateChangeClip: {fileID: 8300000, guid: 212e7989abc40e1479906aeb1ad76660, type: 3}
+  selectionClip: {fileID: 8300000, guid: 01928cac2197b70418a1d73fcfffbb76, type: 3}
+  deselectionClip: {fileID: 8300000, guid: 8c68749093298cf468f8969a3ec724ec, type: 3}
   roundWinClip: {fileID: 8300000, guid: 975dd677c267f9e428af51dfa3bf4275, type: 3}
   roundLoseClip: {fileID: 8300000, guid: 79beef220fd12da4cb9027700251435c, type: 3}
   roundDrawClip: {fileID: 8300000, guid: e06a2f3c569eb6a49aa038a18ef80156, type: 3}

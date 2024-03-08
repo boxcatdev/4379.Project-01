@@ -15,6 +15,8 @@ public class AudioManagerSFX : MonoBehaviour
 
     [Header("SFX Clips")]
     [SerializeField] private AudioClip stateChangeClip;
+    [SerializeField] private AudioClip selectionClip;
+    [SerializeField] private AudioClip deselectionClip;
     [SerializeField] private AudioClip roundWinClip;
     [SerializeField] private AudioClip roundLoseClip;
     [SerializeField] private AudioClip roundDrawClip;
@@ -54,6 +56,12 @@ public class AudioManagerSFX : MonoBehaviour
         {
             case SFXType.StateChange:
                 usedClip = stateChangeClip;
+                break;
+            case SFXType.Select:
+                usedClip = selectionClip; 
+                break;
+            case SFXType.Deselect:
+                usedClip = deselectionClip;
                 break;
             case SFXType.Win:
                 usedClip = roundWinClip;
@@ -127,4 +135,4 @@ public class AudioManagerSFX : MonoBehaviour
     }*/
 }
 
-public enum SFXType { StateChange, Win, Lose, Draw }
+public enum SFXType { StateChange, Select, Deselect, Win, Lose, Draw }

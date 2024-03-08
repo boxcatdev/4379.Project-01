@@ -26,11 +26,14 @@ public class GameSetupState : State
         Debug.Log("STATE: Game Setup");
         Debug.Log("Change tiles to green");
 
+        //reset round
+        ScoreManager.CurrentRound = 0;
+
         //turn all the tiles to green
         //_controller.GridModify.ChangeAllTiles();
 
         //play state change SFX
-        //_controller.AudioSFX.PlaySoundEffect(SFXType.StateChange);
+        _controller.AudioSFX.PlaySoundEffect(SFXType.StateChange);
     }
 
     public override void Exit()

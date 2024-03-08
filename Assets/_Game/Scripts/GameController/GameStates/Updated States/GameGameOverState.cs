@@ -22,6 +22,9 @@ public class GameGameOverState : State
 
         //update instruction UI
         _controller.UIManager.UpdateInstructionText(StatesUIEnum.GameOver);
+
+        //play state change SFX
+        _controller.AudioSFX.PlaySoundEffect(SFXType.StateChange);
     }
 
     public override void Exit()

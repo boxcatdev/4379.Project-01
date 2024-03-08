@@ -109,11 +109,11 @@ public class UIManager : MonoBehaviour
                 break;
             case StatesUIEnum.EnemyFirst:
                 //explain what the enemy will do
-                _instructionText.text = "The enemy is selecting a city to attack...";
+                _instructionText.text = "The enemy has selected a city to attack...";
                 break;
             case StatesUIEnum.EnemySecond:
                 //
-                _instructionText.text = "The enemy will now retaliate by attacking one of your remaining cities.";
+                _instructionText.text = "The enemy has attacked one of your cities. It will be your turn next.";
                 break;
             case StatesUIEnum.GameOver:
                 //

@@ -33,7 +33,17 @@ public class GameEnemyTurnState : State
 
         _hasAttacked = false;
 
+        //resets if city has defense move
+        foreach (HexTile city in GridSelection.CityTiles)
+        {
+            if (city.Team == GameTeam.Enemy)
+                city.ResetDefendMove();
+        }
+
         ScoreManager.OnGameOver += SwitchOnGameOver;
+
+        //play state change SFX
+        _controller.AudioSFX.PlaySoundEffect(SFXType.StateChange);
     }
 
     public override void Exit()
@@ -69,6 +79,7 @@ public class GameEnemyTurnState : State
             //attack the player
             int attackInt = Random.Range(0, 3);
             _controller.EnemyTurn.UseAttackOnCity(attackInt);
+            _controller.EnemyTurn.ResetCityToAttack();
 
             _hasAttacked = true;
         }

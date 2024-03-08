@@ -30,6 +30,9 @@ public class GamePlayerTurnState : State
         _controller.PlayerTurn.ResetPlayerHasAttacked();
 
         ScoreManager.OnGameOver += SwitchOnGameOver;
+
+        //play state change SFX
+        _controller.AudioSFX.PlaySoundEffect(SFXType.StateChange);
     }
 
     public override void Exit()

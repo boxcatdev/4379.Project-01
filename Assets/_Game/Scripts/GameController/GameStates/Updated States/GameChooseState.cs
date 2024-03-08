@@ -31,11 +31,17 @@ public class GameChooseState : State
         //reset choices
         ChooseManager.ChosenCitiesCount = 0;
 
+        //increase round
+        ScoreManager.CurrentRound++;
+
         //reset player cities
         _controller.ChooseManager.ResetPlayerCities();
 
         //setup enemy city defend moves
         _controller.ChooseManager.SetupEnemyDefendMoves();
+
+        //play state change SFX
+        _controller.AudioSFX.PlaySoundEffect(SFXType.StateChange);
     }
 
     public override void Exit()
